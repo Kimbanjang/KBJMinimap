@@ -1,6 +1,6 @@
 This is a Square Minimap for World of Warcraft.
 
-## Main Version
+## Change log
 + 1.1 fix Position Flag
 
 ## History
