@@ -120,6 +120,9 @@ Minimap:HookScript('OnEnter', function()
 	end)
 Minimap:HookScript('OnLeave', OnLeave)
 MiniMapTrackingButton:HookScript('OnLeave', OnLeave)
+QueueStatusMinimapButton:HookScript('OnLeave', OnLeave)
+MiniMapMailFrame:HookScript('OnLeave', OnLeave)
+TimeManagerClockButton:HookScript('OnLeave', OnLeave)
 
 
 -- Mouse Event in Minimap
@@ -164,7 +167,7 @@ end
 
 frame:SetScript("OnEvent", function(self,event)
     self:UnregisterEvent(event)
-    if event == "PLAYER_LOGIN" then
+    if event == "PLAYER_ENTERING_WORLD" then
         self.point = {ObjectiveTrackerFrame:GetPoint()}      
         hooksecurefunc(ObjectiveTrackerFrame, "SetPoint", AdjustSetPoint)    
     end
@@ -172,5 +175,4 @@ frame:SetScript("OnEvent", function(self,event)
         ObjectiveTrackerFrame:SetPoint(unpack(self.point))
     end
 end)
-
-frame:RegisterEvent("PLAYER_LOGIN")
+frame:RegisterEvent("PLAYER_ENTERING_WORLD")
