@@ -141,3 +141,27 @@ Minimap:SetScript("OnMouseUp", function(self, btn)
 		Minimap_OnClick(self)
 	end
 end)
+
+
+-- ObjectiveTracker Move
+local anchor = "TOPRIGHT"
+local xOff = -47
+local yOff = -44
+local otFrame = CreateFrame("Frame")
+
+otFrame:SetScript("OnEvent", function(self, event, addon)
+	if IsAddOnLoaded("Blizzard_ObjectiveTracker") then
+		local objectiveTracker = ObjectiveTrackerFrame
+		objectiveTracker:ClearAllPoints()
+		objectiveTracker:SetPoint(anchor, UIParent, xOff, yOff)
+		hooksecurefunc(objectiveTracker, "SetPoint", function(self, anchorPoint, relativeTo, x, y)
+			if anchorPoint ~= anchor and x ~= xOff and y ~= yOff then
+				self:SetPoint(anchor, UIParent, xOff, yOff)
+			end
+		end)
+		self:UnregisterEvent("ADDON_LOADED")
+	else
+		self:RegisterEvent("ADDON_LOADED")
+	end
+end)
+otFrame:RegisterEvent("PLAYER_LOGIN")
