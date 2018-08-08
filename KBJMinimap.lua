@@ -1,5 +1,5 @@
 Minimap:ClearAllPoints()
-Minimap:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -509, 8)
+Minimap:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -508, 8)
 Minimap:SetSize(190, 190)
 
 Minimap:SetBackdrop({
