@@ -1,6 +1,6 @@
-## Interface: 70300
+## Interface: 80000
 ## Title: KBJ Minimap
-## Version: 1.1
+## Version: 8.0.1.1
 ## Author: Kimbanjang
 ## Notes: Square Minimap for Playing on Other Countries Server
 

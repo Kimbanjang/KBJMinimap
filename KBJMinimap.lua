@@ -14,15 +14,14 @@ Minimap:SetMaskTexture('Interface\\ChatFrame\\ChatFrameBackground')
 
 -- Minimap Buttons Check
 MinimapBorder:Hide()
+MinimapBorderTop:Hide()
 MinimapZoomIn:Hide()
 MinimapZoomOut:Hide()
-MinimapBorderTop:Hide()
-MiniMapVoiceChatFrame:Hide()
 MinimapNorthTag:SetTexture(nil)
 MinimapZoneTextButton:Hide()
 MiniMapWorldMapButton:Hide()
 GameTimeFrame:Hide()
-
+--MiniMapVoiceChatFrame:Hide()
 
 -- Date/Time/Clock 
 if not IsAddOnLoaded("Blizzard_TimeManager") then
