@@ -1,6 +1,6 @@
 Minimap:ClearAllPoints()
-Minimap:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -508, 8)
-Minimap:SetSize(190, 190)
+Minimap:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -408, 8)
+Minimap:SetSize(181, 181)
 
 Minimap:SetBackdrop({
 	bgFile =  "Interface\\ChatFrame\\ChatFrameBackground",
@@ -11,7 +11,6 @@ Minimap:SetBackdropColor(0,0,0,1)
 Minimap:SetBackdropBorderColor(0,0,0,1)
 Minimap:SetMaskTexture('Interface\\ChatFrame\\ChatFrameBackground')
 
-
 -- Minimap Buttons Check
 MinimapBorder:Hide()
 MinimapBorderTop:Hide()
@@ -21,7 +20,6 @@ MinimapNorthTag:SetTexture(nil)
 MinimapZoneTextButton:Hide()
 MiniMapWorldMapButton:Hide()
 GameTimeFrame:Hide()
---MiniMapVoiceChatFrame:Hide()
 
 -- Date/Time/Clock 
 if not IsAddOnLoaded("Blizzard_TimeManager") then
@@ -41,7 +39,6 @@ dateText:SetFont("Interface\\Addons\\KBJMinimap\\media\\square.ttf", 10, "THINOU
 dateText:SetTextColor(MinimapZoneText:GetTextColor())
 dateText:SetPoint("TOP", clockTime, 0, 11)
 dateText:SetText(date("%b %d, %a"))
-
 
 -- Tracking
 MiniMapTracking:SetAlpha(0)
@@ -64,7 +61,6 @@ MiniMapTrackingIcon.SetPoint = function() end
 
 MiniMapTrackingIconOverlay:SetTexture(nil)
 
-
 -- Mail
 MiniMapMailFrame:SetSize(16,16)
 MiniMapMailFrame:ClearAllPoints()
@@ -77,7 +73,6 @@ MiniMapMailIcon:ClearAllPoints()
 MiniMapMailIcon:SetPoint("TOPLEFT", MiniMapMailFrame, "TOPLEFT", 1, -1)
 MiniMapMailIcon:SetPoint("BOTTOMRIGHT", MiniMapMailFrame, "BOTTOMRIGHT", -1, 1)
 
-
 -- DungeonFinder LFG LFR
 QueueStatusMinimapButton:SetSize(16,16)
 QueueStatusMinimapButton:ClearAllPoints()
@@ -85,7 +80,6 @@ QueueStatusMinimapButton:SetPoint("TOPLEFT", Minimap, 6, -6)
 QueueStatusMinimapButtonBorder:SetTexture("Interface\\AddOns\\KBJMinimap\\media\\button_overlay")
 QueueStatusMinimapButtonBorder:SetPoint("TOPLEFT", QueueStatusMinimapButton, "TOPLEFT", -5, 5)
 QueueStatusMinimapButtonBorder:SetPoint("BOTTOMRIGHT", QueueStatusMinimapButton, "BOTTOMRIGHT", 5, -5)
-
 
 -- Instance Difficulty
 MiniMapInstanceDifficulty:ClearAllPoints()
@@ -98,13 +92,11 @@ MiniMapChallengeMode:ClearAllPoints()
 MiniMapChallengeMode:SetPoint("TOPRIGHT", Minimap, 2, 2)
 MiniMapChallengeMode:SetScale(1)
 
-
 -- Garrison
 GarrisonLandingPageMinimapButton:SetSize(38, 38)
 GarrisonLandingPageMinimapButton:ClearAllPoints()
 GarrisonLandingPageMinimapButton:SetParent(Minimap)
 GarrisonLandingPageMinimapButton:SetPoint("BOTTOMRIGHT", Minimap, 3, -3)
-
 
 -- Hide Button
 local function OnLeave()
@@ -123,7 +115,6 @@ QueueStatusMinimapButton:HookScript('OnLeave', OnLeave)
 MiniMapMailFrame:HookScript('OnLeave', OnLeave)
 TimeManagerClockButton:HookScript('OnLeave', OnLeave)
 
-
 -- Mouse Event in Minimap
 Minimap:EnableMouseWheel(true)
 Minimap:SetScript("OnMouseWheel", function(self, d)
@@ -141,8 +132,33 @@ Minimap:SetScript("OnMouseUp", function(self, btn)
 	end
 end)
 
+-- Set BattlefieldMapFrame
+local kbjFuncBattleMap = CreateFrame('Frame')
+kbjFuncBattleMap:SetScript('OnEvent', function()
+	if not BattlefieldMapFrame then
+		LoadAddOn('Blizzard_BattlefieldMap')
+	end
+	
+	local BFMF = CreateFrame('Frame', nil, BattlefieldMapFrame)
+	BFMF:SetFrameStrata('LOW')
+	BFMF:SetPoint('TOPLEFT', BattlefieldMapFrame, 'TOPLEFT', -1, 3)
+    BFMF:SetPoint('BOTTOMRIGHT', BattlefieldMapFrame, 'BOTTOMRIGHT', -2, 2)
+    BFMF:SetBackdrop({
+        bgFile =  "Interface\\ChatFrame\\ChatFrameBackground",
+        edgeFile = "Interface\\Buttons\\WHITE8x8", edgeSize = 1, 
+        insets = {left = 1, right = 1, top = 1, bottom = 1} 
+	})
+    BFMF:SetBackdropColor(0, 0, 0, 1)
+    BFMF:SetBackdropBorderColor(0, 0, 0, 1)
 
--- ObjectiveTracker Move
+	BattlefieldMapFrame:SetScale(0.9)
+	BattlefieldMapFrame:SetPoint('TOPLEFT', Minimap, 'TOPRIGHT', 5, -3)
+	BattlefieldMapFrame.BorderFrame:Hide()
+	BattlefieldMapFrame:Show()
+end)
+kbjFuncBattleMap:RegisterEvent('PLAYER_ENTERING_WORLD')
+
+-- Move ObjectiveTracker
 local anchor = "TOPRIGHT"
 local xOff = -47
 local yOff = -44
