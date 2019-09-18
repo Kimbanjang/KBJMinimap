@@ -132,6 +132,7 @@ Minimap:SetScript("OnMouseUp", function(self, btn)
 	end
 end)
 
+--[[
 -- Set BattlefieldMapFrame
 local kbjFuncBattleMap = CreateFrame('Frame')
 kbjFuncBattleMap:SetScript('OnEvent', function()
@@ -157,6 +158,7 @@ kbjFuncBattleMap:SetScript('OnEvent', function()
 	BattlefieldMapFrame:Show()
 end)
 kbjFuncBattleMap:RegisterEvent('PLAYER_ENTERING_WORLD')
+]]
 
 -- Move ObjectiveTracker
 local anchor = "TOPRIGHT"
