@@ -1,7 +1,9 @@
-## Interface: 80200
+## Interface: 80205
 ## Title: KBJ Minimap
-## Version: 8.2.0.1
+## Version: 8.2.5.1
 ## Author: Kimbanjang
 ## Notes: Square Minimap for Playing on Other Countries Server
 
 KBJminimap.lua
+KBJMinimap_ObjectiveTracker.lua
+KBJMinimap_Misc.lua
